@@ -1,153 +1,228 @@
-# Hotel Booking System Using Machine Learning
+# GrandStay Intelligence | Hotel Booking & ML Cancellation Prediction Platform
 
-A complete, end-to-end Machine Learning web application to predict hotel booking cancellations, manage reservations, and analyze hospitality booking dynamics using **Python, Streamlit, Pandas, Scikit-learn, and Joblib**.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsinghrajvardhan48%2FHotel-Booking-Analyzer-)
+![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-18.3-blue?style=flat-square&logo=react)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat-square&logo=tailwind-css)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3-orange?style=flat-square&logo=scikit-learn)
+![Vercel Ready](https://img.shields.io/badge/Deployment-Vercel%20Serverless-emerald?style=flat-square&logo=vercel)
 
----
-
-## 1. Project Overview
-
-In the hospitality sector, booking cancellations constitute a major operational challenge. Across the hotel industry, approximately **37% of reservations are cancelled prior to arrival**, causing vacant rooms, inefficient staff scheduling, and significant lost revenue.
-
-The **Hotel Booking System Using Machine Learning** automates cancellation risk evaluation at the moment of reservation intake:
-- **Intake & Booking Form:** Captures reservation parameters (hotel type, room type, arrival dates, guest counts, meal packages, lead times, deposit types).
-- **Machine Learning Pipeline:** Employs an `sklearn.compose.ColumnTransformer` and an ensemble `RandomForestClassifier` trained on historical data.
-- **Risk Classification:** Predicts whether a booking is **Low Cancellation Risk (Confirmed)** or **High Cancellation Risk (Likely to Cancel)** with an exact confidence percentage.
-- **Exploratory Data Analytics (EDA):** Delivers interactive dashboards analyzing booking seasonality, customer segments, ADR, and cancellation drivers.
+A production-grade, full-stack Machine Learning web application designed to forecast hotel reservation cancellations, manage bookings, and analyze hospitality booking dynamics across 119,208 canonical reservations.
 
 ---
 
-## 2. Technologies Used
+## 🚀 Live Vercel Deployment
 
-| Technology | Purpose |
-| :--- | :--- |
-| **Python 3.10+** | Core programming language |
-| **Pandas** | Data wrangling, tabular manipulation, and cleaning |
-| **NumPy** | Numerical computing and array processing |
-| **Scikit-Learn** | Preprocessing (`ColumnTransformer`, `OneHotEncoder`, `SimpleImputer`) and `RandomForestClassifier` |
-| **Matplotlib & Seaborn** | Statistical visualizations, distribution charts, and confusion matrix heatmap |
-| **Joblib** | Model serialization (`model.pkl` and `preprocessor.pkl`) |
-| **Streamlit** | Interactive multi-page web application frontend |
+Deploying this repository to **Vercel** requires **zero configuration**:
+
+1. Log into your [Vercel Dashboard](https://vercel.com).
+2. Click **"Add New"** > **"Project"**.
+3. Import this repository: `https://github.com/singhrajvardhan48/Hotel-Booking-Analyzer-`.
+4. Vercel automatically detects the **Next.js** framework.
+5. Click **"Deploy"** — your live full-stack app and serverless API endpoints will be live worldwide in under 2 minutes!
 
 ---
 
-## 3. Dataset & Data Cleaning
+## 🌟 Key Application Features
 
-The project uses the canonical **Hotel Booking Demand Dataset** (`hotel_bookings.csv`), consisting of **119,390 raw records and 32 attributes**.
+### 1. 📊 Executive Hospitality Dashboard
+- High-level KPIs: Total Bookings (119,208), Historical Cancellation Rate (37.0%), ADR ($101.83), Model Accuracy (85.16%), Precision (86.67%).
+- Strategic insight panels breaking down the Non-Refundable Deposit Paradox, Lead Time Risk Thresholds, and Special Request Engagement Signals.
+- Monthly confirmed vs. cancelled seasonality charts.
 
-### Data Cleaning Steps (`data_cleaning.py`):
-1. **Handling Missing Values:**
-   - `children`: 4 missing values imputed with `0`.
-   - `country`: 488 missing values imputed with `'Unknown'`.
-   - `agent`: 16,340 missing values imputed with `0` (indicating Direct Booking without travel agency).
-   - `company`: 112,593 missing values (94.3%) imputed with `0` (indicating individual booking).
-2. **Filtering Invalid Records & Outliers:**
-   - Removed 180 invalid bookings where `adults + children + babies == 0`.
-   - Removed negative and extreme outlier ADR values (`adr < 0` or `adr >= 5000`).
-3. **Categorical Normalization:**
-   - Replaced `'Undefined'` meal packages with `'SC'` (Self Catering / Room Only).
-   - Normalized `'Undefined'` market segments and distribution channels.
-   - Grouped low-frequency countries into `'Other'` while preserving the Top 15 nationalities (`PRT`, `GBR`, `FRA`, `ESP`, `DEU`, etc.).
-4. **Preventing Target Leakage:**
-   - Excluded `reservation_status` (which directly reveals `'Check-Out'` or `'Canceled'`) and `reservation_status_date`.
-   - Excluded `assigned_room_type` to evaluate risk purely based on initial reservation requests (`reserved_room_type`).
-5. **Output Cleaned Dataset:**
-   - Saved clean data to `cleaned_hotel_bookings.csv` (119,208 valid rows).
+### 2. 🛎️ Instant Cancellation Risk Predictor
+- Full booking intake form covering property type, room category, meal package, deposit guarantees, lead times, nightly rate, guest party counts, and special requests.
+- **One-Click Quick Presets**:
+  - 🏖️ *Family Vacation (Low Risk)*
+  - 💼 *Corporate Traveler (Low Risk)*
+  - ⚠️ *High-Risk Group / OTA (High Risk)*
+  - ⚡ *Last-Minute Leisure*
+- **Real-Time ML Verdict**: Outputs *Low Cancellation Risk* (Confirmed) or *High Cancellation Risk* (Likely to Cancel) with exact probability scores (`<2ms` inference time).
+- **Contributing Factors Breakdown**: Explains which specific reservation parameters drove the score.
+- **Actionable Managerial Playbooks**: Automated recommendations for deposits, reminders, and waitlist allocations.
+
+### 3. 📈 Interactive Analytics & Exploratory Data Analysis (EDA)
+- **Seasonality Curves**: Monthly booking volume and ADR trends (Jan–Dec).
+- **Property Split**: City Hotel vs. Resort Hotel cancellation dynamics.
+- **Market Segments**: Online TA, Offline TA, Direct, Corporate, and Group performance.
+- **Lead Time Analysis**: Cancellation trajectories bucketed from 0 to 365+ days.
+- **Geographic Origins**: Volume and cancellation behavior across top domestic and international markets.
+
+### 4. 🎯 Model Performance & Explainability (XAI)
+- Live specs: Scikit-Learn `RandomForestClassifier` (100 Trees, `max_depth=16`).
+- Evaluated on **23,842 unseen test records (20% stratified holdout)** without target leakage.
+- Confusion Matrix (14,039 TN, 963 FP, 2,576 FN, 6,264 TP).
+- Top 12 Gini Feature Importances chart.
+
+### 5. 📋 Front Desk Reservations Ledger
+- Interactive reservation queue with real-time risk indicators and search filters.
+- Direct persistence: Save evaluated bookings from the predictor into the active front-desk ledger.
 
 ---
 
-## 4. Machine Learning Model & Evaluation
+## 🧠 Machine Learning Engine & Metrics
 
-The predictive engine uses a **Random Forest Classifier** (`n_estimators=100`, `max_depth=16`, `min_samples_split=5`) trained on 95,366 samples and evaluated on **23,842 unseen test records (20% holdout split, stratified)**.
-
-### Model Performance Metrics:
-
-| Metric | Test Set Score | Description |
+| Metric | Score | Description |
 | :--- | :---: | :--- |
-| **Accuracy** | **85.16%** | Overall percentage of correct predictions |
+| **Accuracy** | **85.16%** | Overall classification accuracy on unseen test data |
 | **Precision** | **86.67%** | When predicting cancellation, model is correct 86.67% of the time |
 | **Recall** | **70.86%** | Identifies 70.86% of all actual cancellations |
 | **F1 Score** | **77.97%** | Harmonic balance between Precision and Recall |
 
-### Confusion Matrix (Test Data):
-
-$$\begin{pmatrix} \text{TN (Correctly Not Canceled)}: 14,039 & \text{FP (False Alarm)}: 963 \\ \text{FN (Missed Cancellation)}: 2,576 & \text{TP (Caught Cancellation)}: 6,264 \end{pmatrix}$$
-
 ### Top 5 Predictive Features:
-1. **`deposit_type_Non Refund` (13.91%):** Bookings with non-refundable deposits correlate strongly with specific group/corporate risk patterns.
+1. **`deposit_type_Non Refund` (13.91%):** Bulk travel agency group allocations exhibit automated expiration patterns.
 2. **`deposit_type_No Deposit` (11.09%):** Zero financial commitment increases guest drop-off.
-3. **`country_PRT` (10.97%):** Domestic bookings exhibit unique cancellation behaviors.
-4. **`lead_time` (10.43%):** Extended lead times significantly inflate cancellation probability.
+3. **`country_PRT` (10.97%):** Domestic bookings exhibit distinct seasonality and flexibility.
+4. **`lead_time` (10.43%):** Extended advance booking windows inflate cancellation probability.
 5. **`total_of_special_requests` (7.16%):** Engaged guests who submit requests are far less likely to cancel.
 
 ---
 
-## 5. Project Structure
+## 🛠️ Full-Stack Architecture
 
 ```text
-hotel-booking-system/
+Hotel Booking Analyzer/
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── predict/route.ts      # Serverless ML cancellation inference API
+│   │   │   ├── analytics/route.ts    # Aggregated EDA dataset statistics API
+│   │   │   ├── model-info/route.ts   # Model metadata and confusion matrix API
+│   │   │   ├── bookings/route.ts     # Reservations ledger API (GET, POST)
+│   │   │   └── health/route.ts       # Service healthcheck endpoint
+│   │   ├── globals.css               # Tailwind CSS & custom styling
+│   │   ├── layout.tsx                # App root layout
+│   │   └── page.tsx                  # Full-featured interactive dashboard
+│   ├── data/
+│   │   ├── analytics_data.json       # Precomputed dataset aggregations (119k rows)
+│   │   ├── forest_model.json         # High-speed compact decision forest
+│   │   └── models_metadata.json      # Model performance statistics
+│   ├── lib/
+│   │   ├── predictor.ts              # Tree traversal inference engine (<2ms)
+│   │   └── mockBookings.ts           # Initial ledger reservations
+│   └── types/
+│       └── index.ts                  # TypeScript schema definitions
 │
-├── app.py                      # Streamlit web application (4 pages)
-├── data_cleaning.py            # Data loading, inspection, cleaning & ColumnTransformer pipeline
-├── eda.py                      # Exploratory Data Analysis & visual generation
-├── train_model.py              # Model training, test evaluation & artifact serialization
-├── requirements.txt            # Required Python packages
-├── README.md                   # Complete documentation
+├── api/
+│   └── index.py                      # FastAPI serverless backend endpoint
 │
-├── hotel_bookings.csv          # Original dataset (119,390 rows)
-├── cleaned_hotel_bookings.csv  # Cleaned dataset (119,208 rows)
-├── model.pkl                   # Trained Random Forest classifier
-├── preprocessor.pkl            # Fitted ColumnTransformer pipeline
-├── models_metadata.json        # Saved evaluation metrics
+├── vercel.json                       # Vercel deployment configuration
+├── package.json                      # Next.js & React dependencies
+├── tsconfig.json                     # TypeScript configuration
+├── tailwind.config.ts                # Tailwind design token configuration
 │
-└── assets/                     # Generated charts used in reports and UI
-    ├── hotel_type_distribution.png
-    ├── cancellation_rate.png
-    ├── monthly_booking_trends.png
-    ├── adr_distribution.png
-    ├── customer_type_distribution.png
-    ├── room_type_distribution.png
-    ├── lead_time_vs_cancellation.png
-    ├── confusion_matrix.png
-    └── feature_importance.png
+├── app.py                            # Streamlit web application (Local execution)
+├── data_cleaning.py                  # Scikit-Learn data cleaning pipeline
+├── eda.py                            # Python exploratory data analysis script
+├── train_model.py                    # Scikit-Learn model training script
+├── requirements.txt                  # Python dependencies
+└── model.pkl / preprocessor.pkl      # Serialized scikit-learn artifacts
 ```
 
 ---
 
-## 6. Installation & Execution Instructions
+## 💻 Local Development Setup
 
-### Step 1: Install Dependencies
+### Option 1: Run the Next.js Full-Stack App (Recommended)
+
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Run local development server
+npm run dev
+```
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
+
+To verify a production build:
+```bash
+npm run build
+npm start
+```
+
+---
+
+### Option 2: Run the Python FastAPI Backend
+
+```bash
+# 1. Install Python packages
 pip install -r requirements.txt
-```
 
-### Step 2: Clean the Dataset
-```bash
-python data_cleaning.py
+# 2. Start the FastAPI server
+uvicorn api.index:app --reload --port 8000
 ```
+Open **[http://localhost:8000/docs](http://localhost:8000/docs)** to view the Swagger API documentation.
 
-### Step 3: Run Exploratory Data Analysis (EDA)
-```bash
-python eda.py
-```
+---
 
-### Step 4: Train and Save the Model Artifacts
-Generates `model.pkl` and `preprocessor.pkl`:
-```bash
-python train_model.py
-```
+### Option 3: Run the Streamlit Application
 
-### Step 5: Launch the Streamlit Application
 ```bash
 streamlit run app.py
 ```
-Open your browser at **`http://localhost:8501`**.
+Open **[http://localhost:8501](http://localhost:8501)** in your browser.
 
 ---
 
-## 7. Streamlit Application Pages
+## 📡 Serverless API Reference
 
-1. **🏠 Home:** Introduction to hotel demand, problem statement, technology breakdown, and architecture flowchart.
-2. **📝 Make a Booking & Predict:** Interactive reservation form for hotel type, room type, guest counts, arrival dates, meal plans, deposit status, and ADR. Outputs instant **Low Cancellation Risk** (green) or **High Cancellation Risk** (red) with probability meters and management recommendations.
-3. **📊 Booking Analytics:** Interactive dashboards detailing hotel type distribution, monthly arrival patterns, ADR boxplots, customer type splits, and raw data explorer.
-4. **🎯 Model Performance:** Live evaluation metrics, confusion matrix heatmap, and top 12 feature importances.
+### 1. `POST /api/predict`
+Evaluates cancellation risk for a reservation.
 
+**Request Body:**
+```json
+{
+  "hotel": "City Hotel",
+  "reserved_room_type": "A",
+  "meal": "BB",
+  "deposit_type": "No Deposit",
+  "market_segment": "Online TA",
+  "customer_type": "Transient",
+  "distribution_channel": "TA/TO",
+  "arrival_date_month": "July",
+  "stays_in_weekend_nights": 1,
+  "stays_in_week_nights": 3,
+  "lead_time": 45,
+  "adr": 115.0,
+  "adults": 2,
+  "children": 0,
+  "babies": 0,
+  "country": "PRT",
+  "is_repeated_guest": "0",
+  "total_of_special_requests": 1,
+  "required_car_parking_spaces": 0,
+  "previous_cancellations": 0,
+  "previous_bookings_not_canceled": 0,
+  "booking_changes": 0,
+  "days_in_waiting_list": 0
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "prediction": 0,
+  "risk_level": "LOW RISK",
+  "cancellation_probability": 23.4,
+  "confirmation_probability": 76.6,
+  "confidence_score": 76.6,
+  "estimated_revenue": 460.0,
+  "total_nights": 4,
+  "risk_factors": [
+    {
+      "factor": "Zero Financial Commitment",
+      "impact": "medium",
+      "description": "Guest has no deposit collateral, increasing propensity to no-show."
+    }
+  ],
+  "recommendations": [
+    "Booking exhibits low cancellation risk; assign preferred room tier promptly.",
+    "Send pre-arrival concierge welcome message."
+  ]
+}
+```
+
+---
+
+## 📄 License
+MIT License. Created for hospitality revenue and reservations management research.

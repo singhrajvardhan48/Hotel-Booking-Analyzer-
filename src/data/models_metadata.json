@@ -1,0 +1,81 @@
+{
+    "model_name": "Random Forest Classifier",
+    "n_estimators": 100,
+    "max_depth": 16,
+    "accuracy": 0.8516,
+    "precision": 0.8667,
+    "recall": 0.7086,
+    "f1_score": 0.7797,
+    "confusion_matrix": [
+        [
+            14039,
+            963
+        ],
+        [
+            2576,
+            6264
+        ]
+    ],
+    "top_features": [
+        {
+            "Feature": "deposit_type_Non Refund",
+            "Importance": 0.13909003771204873
+        },
+        {
+            "Feature": "deposit_type_No Deposit",
+            "Importance": 0.1108509992121259
+        },
+        {
+            "Feature": "country_PRT",
+            "Importance": 0.10972551179758722
+        },
+        {
+            "Feature": "lead_time",
+            "Importance": 0.10426648149576395
+        },
+        {
+            "Feature": "total_of_special_requests",
+            "Importance": 0.07160153025375084
+        },
+        {
+            "Feature": "previous_cancellations",
+            "Importance": 0.055534676328826624
+        },
+        {
+            "Feature": "market_segment_Online TA",
+            "Importance": 0.03745588442354379
+        },
+        {
+            "Feature": "required_car_parking_spaces",
+            "Importance": 0.035083405352717124
+        },
+        {
+            "Feature": "adr",
+            "Importance": 0.03405706392676547
+        },
+        {
+            "Feature": "market_segment_Groups",
+            "Importance": 0.026648442918289626
+        },
+        {
+            "Feature": "booking_changes",
+            "Importance": 0.024798676464713
+        },
+        {
+            "Feature": "market_segment_Offline TA/TO",
+            "Importance": 0.024752434432473235
+        },
+        {
+            "Feature": "customer_type_Transient",
+            "Importance": 0.022972595620764643
+        },
+        {
+            "Feature": "customer_type_Transient-Party",
+            "Importance": 0.01924781305439504
+        },
+        {
+            "Feature": "stays_in_week_nights",
+            "Importance": 0.016989871428176602
+        }
+    ]
+}
