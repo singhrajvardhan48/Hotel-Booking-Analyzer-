@@ -98,3 +98,4 @@ export const initialBookings: ReservationRecord[] = [
     created_at: '2026-11-18',
   },
 ];
+

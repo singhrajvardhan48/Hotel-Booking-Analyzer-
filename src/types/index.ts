@@ -125,3 +125,4 @@ export interface CountryItem {
   canceled: number;
   cancellation_rate: number;
 }
+
