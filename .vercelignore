@@ -1,0 +1,12 @@
+# Exclude offline Python ML training pipeline, large CSVs, and .pkl artifacts from Vercel deployments
+ml_pipeline/
+*.csv
+*.pkl
+*.ipynb
+*.py
+__pycache__/
+.venv/
+venv/
+.git/
+README.md
+

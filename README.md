@@ -78,11 +78,11 @@ Deploying this repository to **Vercel** requires **zero configuration**:
 
 ---
 
-## 🛠️ Full-Stack Architecture
+## 🛠️ Full-Stack Architecture (Vercel-Ready)
 
 ```text
 Hotel Booking Analyzer/
-├── src/
+├── src/                              # Next.js 14 Full-Stack Web App (Deployed to Vercel)
 │   ├── app/
 │   │   ├── api/
 │   │   │   ├── predict/route.ts      # Serverless ML cancellation inference API
@@ -90,9 +90,10 @@ Hotel Booking Analyzer/
 │   │   │   ├── model-info/route.ts   # Model metadata and confusion matrix API
 │   │   │   ├── bookings/route.ts     # Reservations ledger API (GET, POST)
 │   │   │   └── health/route.ts       # Service healthcheck endpoint
-│   │   ├── globals.css               # Tailwind CSS & custom styling
+│   │   ├── icon.svg                  # Application favicon
+│   │   ├── globals.css               # Minimalist Tailwind CSS styling
 │   │   ├── layout.tsx                # App root layout
-│   │   └── page.tsx                  # Full-featured interactive dashboard
+│   │   └── page.tsx                  # Risk Predictor landing page & dashboards
 │   ├── data/
 │   │   ├── analytics_data.json       # Precomputed dataset aggregations (119k rows)
 │   │   ├── forest_model.json         # High-speed compact decision forest
@@ -103,20 +104,23 @@ Hotel Booking Analyzer/
 │   └── types/
 │       └── index.ts                  # TypeScript schema definitions
 │
-├── api/
-│   └── index.py                      # FastAPI serverless backend endpoint
-│
-├── vercel.json                       # Vercel deployment configuration
+├── vercel.json                       # Vercel framework & API headers config
+├── .vercelignore                     # Excludes heavy ML training files from Vercel upload
 ├── package.json                      # Next.js & React dependencies
 ├── tsconfig.json                     # TypeScript configuration
 ├── tailwind.config.ts                # Tailwind design token configuration
 │
-├── app.py                            # Streamlit web application (Local execution)
-├── data_cleaning.py                  # Scikit-Learn data cleaning pipeline
-├── eda.py                            # Python exploratory data analysis script
-├── train_model.py                    # Scikit-Learn model training script
-├── requirements.txt                  # Python dependencies
-└── model.pkl / preprocessor.pkl      # Serialized scikit-learn artifacts
+└── ml_pipeline/                      # Offline Python ML Training & Legacy Streamlit App
+    ├── app.py                        # Legacy Streamlit web application
+    ├── fastapi_server.py             # Standalone Python FastAPI backend
+    ├── data_cleaning.py              # Scikit-Learn data cleaning pipeline
+    ├── eda.py                        # Exploratory data analysis script
+    ├── train_model.py                # Scikit-Learn model training script
+    ├── requirements.txt              # Python dependencies
+    ├── hotel_bookings.csv            # Raw dataset
+    ├── cleaned_hotel_bookings.csv    # Cleaned dataset
+    ├── model.pkl / preprocessor.pkl  # Serialized scikit-learn artifacts
+    └── assets/                       # Static EDA charts
 ```
 
 ---
@@ -142,22 +146,22 @@ npm start
 
 ---
 
-### Option 2: Run the Python FastAPI Backend
+### Option 2: Run the Python FastAPI Backend (Optional)
 
 ```bash
-# 1. Install Python packages
+cd ml_pipeline
 pip install -r requirements.txt
-
-# 2. Start the FastAPI server
-uvicorn api.index:app --reload --port 8000
+uvicorn fastapi_server:app --reload --port 8000
 ```
 Open **[http://localhost:8000/docs](http://localhost:8000/docs)** to view the Swagger API documentation.
 
 ---
 
-### Option 3: Run the Streamlit Application
+### Option 3: Run the Legacy Streamlit Application
 
 ```bash
+cd ml_pipeline
+pip install -r requirements.txt
 streamlit run app.py
 ```
 Open **[http://localhost:8501](http://localhost:8501)** in your browser.

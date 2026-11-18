@@ -8,11 +8,9 @@ import {
   CheckCircle2,
   Calendar,
   Users,
-  DollarSign,
   BarChart3,
   ShieldCheck,
   Search,
-  Sparkles,
   ExternalLink,
   ChevronRight,
   Info,
@@ -31,9 +29,7 @@ import {
   Trash2,
   SlidersHorizontal,
   Compass,
-  ArrowUpRight,
   Luggage,
-  MapPin,
   CheckCheck
 } from 'lucide-react';
 import {
@@ -431,7 +427,7 @@ Special Requests: ${formData.total_of_special_requests}
                 <span>{tab.label}</span>
                 {tab.badge !== undefined && (
                   <span
-                    className={`ml-1 px-1.5 py-0.2 rounded-full text-[10px] ${
+                    className={`ml-1 px-1.5 py-0.5 rounded-full text-[10px] ${
                       isActive ? 'bg-slate-700 text-white' : 'bg-slate-200 text-slate-700'
                     }`}
                   >

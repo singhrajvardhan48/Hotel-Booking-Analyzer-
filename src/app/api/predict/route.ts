@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { BookingInput } from '@/types';
 import { predictCancellation } from '@/lib/predictor';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as BookingInput;
 
-    // Validate required fields
     if (!body || typeof body.lead_time !== 'number' || !body.hotel) {
       return NextResponse.json(
         { error: 'Invalid input payload: lead_time and hotel are required.' },
@@ -25,3 +26,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204 });
+}

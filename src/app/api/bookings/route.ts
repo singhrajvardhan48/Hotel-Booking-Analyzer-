@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ReservationRecord } from '@/types';
 import { initialBookings } from '@/lib/mockBookings';
 
+export const dynamic = 'force-dynamic';
+
 // In-memory ledger storage for serverless runtime
 let bookingsStore: ReservationRecord[] = [...initialBookings];
 
@@ -21,8 +23,8 @@ export async function POST(request: NextRequest) {
 
     const record: ReservationRecord = {
       ...newBooking,
-      id: `BK-${Math.floor(1000 + Math.random() * 9000)}`,
-      created_at: new Date().toISOString().split('T')[0],
+      id: newBooking.id || `BK-${Math.floor(1000 + Math.random() * 9000)}`,
+      created_at: newBooking.created_at || new Date().toISOString().split('T')[0],
     };
 
     bookingsStore = [record, ...bookingsStore];
@@ -36,3 +38,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204 });
+}
