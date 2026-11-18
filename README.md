@@ -1,9 +1,9 @@
 # GrandStay Intelligence | Hotel Booking & ML Cancellation Prediction Platform
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsinghrajvardhan48%2FHotel-Booking-Analyzer-)
-![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat-square&logo=next.js)
-![React](https://img.shields.io/badge/React-18.3-blue?style=flat-square&logo=react)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat-square&logo=tailwind-css)
+![Next.js](https://img.shields.io/badge/Next.js-16.4-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19.3-blue?style=flat-square&logo=react)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.3-38bdf8?style=flat-square&logo=tailwind-css)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3-orange?style=flat-square&logo=scikit-learn)
 ![Vercel Ready](https://img.shields.io/badge/Deployment-Vercel%20Serverless-emerald?style=flat-square&logo=vercel)
 
